@@ -1965,7 +1965,9 @@
 							c = s.currentStep,
 							l = s.previousStep,
 							p = c.end;
+
 						if (e && e.value && (c.value = e.value), e && e.hideInput && (c.hideInput = e.hideInput), e && e.trigger && (c.trigger = n.getTriggeredStep(e.trigger, e.value)), p) n.handleEnd();
+
 						else if (c.options && e) {
 							var f = c.options.filter(function (t) {
 									return t.value === e.value
@@ -2017,6 +2019,11 @@
 								renderedSteps: a
 							})
 						}, 300)
+					}), te(ee(ee(n)), "handleStep", function (value) {
+						var e = n.props.handleStep;
+						if(e) {
+							e({ value })
+						}
 					}), te(ee(ee(n)), "handleEnd", function () {
 						var e = n.props.handleEnd;
 						if (e) {
@@ -2079,14 +2086,17 @@
 						if ((n.isInputValueEmpty() || t) && r) return n.recognition.speak(), void(t || n.setState({
 							speaking: !0
 						}));
+
 						n.submitUserMessage()
 					}), te(ee(ee(n)), "submitUserMessage", function () {
+
 						var e = n.state,
 							t = e.defaultUserSettings,
 							r = e.inputValue,
 							o = e.previousSteps,
 							i = e.renderedSteps,
 							a = n.state.currentStep;
+						if(e && e.inputValue) n.handleStep(e.inputValue);
 						if (!a.validator || !n.checkInvalidInput()) {
 							var u = {
 								message: r,
@@ -2421,6 +2431,7 @@
 			floatingStyle: ie.a.objectOf(ie.a.any),
 			footerStyle: ie.a.objectOf(ie.a.any),
 			handleEnd: ie.a.func,
+			handleStep: ie.a.func,
 			headerComponent: ie.a.element,
 			headerTitle: ie.a.string,
 			height: ie.a.string,
@@ -2464,6 +2475,7 @@
 			floatingStyle: {},
 			footerStyle: {},
 			handleEnd: void 0,
+			handleStep: void 0,
 			headerComponent: void 0,
 			headerTitle: "Chat",
 			height: "520px",
